@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Steve is cool</title>
+</head>
+
+<body>
+    <h1></h1>
+    <h1>hello steve</h1>
+    <h1>hello steve</h1>
+    <h1>hello steve</h1>
+    <h1>hello steve</h1>
+    <h1>hello steve</h1>
+    <h1>hello steve</h1>
+
+
+    <script>
+
+        var getStuff = function (h1, i) {
+            fetch("http://localhost:8001/stuff/"+i)
+                .then((r) => r.text())
+                .then(function (r) {
+                    h1.innerHTML = "<img src=\""+r+"\">";
+                });
+        };
+        var doStuff = function (timer1, timer2) {
+            h1s.forEach(function (h1) {
+                var t = timer1;
+                var t2 = timer2;
+                setTimeout(function () {
+                    h1.style = "color:red;font-size:20px;"
+                    getStuff(h1, t);
+                }, timer1 * 1000);
+                timer1 += 1;
+                setTimeout(function () {
+                    h1.style = "color:green;font-size:40px;"
+                    getStuff(h1, t2);
+                }, timer2 * 1000);
+                timer2 += 1;
+            });
+        }
+        var h1s = document.body.querySelectorAll('h1');
+        var x = 1;
+        var y = h1s.length;
+
+        setInterval(function () {
+            doStuff(x, y);
+        }, (h1s.length - 1) * 2000);
+        doStuff(x, y);
+    </script>
+</body>
+
+</html>
